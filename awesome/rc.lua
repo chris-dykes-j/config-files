@@ -222,7 +222,7 @@ globalkeys = gears.table.join(
     -- Firefox
     awful.key({ modkey },            "b",     function ()
         awful.util.spawn("firefox") end,
-              {description = "run application", group = "launcher"}),
+              {description = "run firefox", group = "launcher"}),
 
     -- Menubar
     awful.key({ modkey }, "p", function() menubar.show() end,
@@ -357,6 +357,12 @@ awful.rules.rules = {
      }
     },
 
+    -- Don't focus on polybar
+    {
+        rule_any = { class = {"Polybar"}},
+        properties = { border_width = false }
+    },
+
     -- Floating clients.
     { rule_any = {
         instance = {
@@ -414,9 +420,11 @@ client.connect_signal("unfocus", function(c) c.border_color = "#000000" end)
 -- }}}
 
 -- Gaps
-beautiful.useless_gap = 3 
+beautiful.useless_gap = 5 
 
-awful.spawn.with_shell("picom")
+-- Run at start
 awful.spawn.with_shell("redshift -P -O 3500")
 awful.spawn.with_shell("/home/chris/.config/polybar/launch.sh")
+awful.spawn.with_shell("picom")
+awful.spawn.with_shell("")
 awful.spawn.with_shell("feh --bg-fill /home/chris/Pictures/Wallpaper/guitar-miku.jpg")
