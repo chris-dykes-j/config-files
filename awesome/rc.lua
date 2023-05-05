@@ -59,6 +59,9 @@ editor_cmd = terminal .. " -e " .. editor
 -- However, you can use another modifier like Mod1, but it may interact with others.
 modkey = "Mod4"
 
+-- Custom layout
+-- local center_fair = require("centerfair")
+
 -- Table of layouts to cover with awful.layout.inc, order matters.
 awful.layout.layouts = {
     -- awful.layout.suit.floating,
@@ -66,7 +69,7 @@ awful.layout.layouts = {
     -- awful.layout.suit.tile.left,
     -- awful.layout.suit.tile.bottom,
     -- awful.layout.suit.tile.top,
-    -- awful.layout.suit.fair,
+    awful.layout.suit.fair,
     -- awful.layout.suit.fair.horizontal,
     -- awful.layout.suit.spiral,
     -- awful.layout.suit.spiral.dwindle,
@@ -223,6 +226,11 @@ globalkeys = gears.table.join(
     awful.key({ modkey },            "b",     function ()
         awful.util.spawn("firefox") end,
               {description = "run firefox", group = "launcher"}),
+
+    -- Screenshot
+    awful.key({ modkey}, "Print", function () awful.util.spawn_with_shell("maim ~/Pictures/Screenshots/$(date +%s).png") end,
+              {description = "get screen shot", group = "launcher"}),
+
 
     -- Menubar
     awful.key({ modkey }, "p", function() menubar.show() end,
@@ -426,5 +434,4 @@ beautiful.useless_gap = 5
 awful.spawn.with_shell("redshift -P -O 3500")
 awful.spawn.with_shell("/home/chris/.config/polybar/launch.sh")
 awful.spawn.with_shell("picom")
-awful.spawn.with_shell("")
 awful.spawn.with_shell("feh --bg-fill /home/chris/Pictures/Wallpaper/guitar-miku.jpg")
