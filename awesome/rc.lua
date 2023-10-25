@@ -64,12 +64,12 @@ modkey = "Mod4"
 
 -- Table of layouts to cover with awful.layout.inc, order matters.
 awful.layout.layouts = {
-    -- awful.layout.suit.floating,
     awful.layout.suit.tile,
     -- awful.layout.suit.tile.left,
     -- awful.layout.suit.tile.bottom,
     -- awful.layout.suit.tile.top,
     awful.layout.suit.fair,
+    -- awful.layout.suit.floating,
     -- awful.layout.suit.fair.horizontal,
     -- awful.layout.suit.spiral,
     -- awful.layout.suit.spiral.dwindle,
@@ -432,6 +432,6 @@ beautiful.useless_gap = 5
 
 -- Run at start
 awful.spawn.with_shell("redshift -P -O 3500")
-awful.spawn.with_shell("/home/chris/.config/polybar/launch.sh")
+-- awful.spawn.with_shell("/home/chris/.config/polybar/launch.sh")
 awful.spawn.with_shell("picom")
-awful.spawn.with_shell("feh --bg-fill /home/chris/Pictures/Wallpaper/guitar-miku.jpg")
+awful.spawn.with_shell("feh --bg-fill /home/chris/.config/background")

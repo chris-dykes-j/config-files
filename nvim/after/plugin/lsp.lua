@@ -1,15 +1,18 @@
-local lsp = require('lsp-zero').preset({
-  name = 'minimal',
-  set_lsp_keymaps = true,
-  manage_nvim_cmp = true,
-  suggest_lsp_servers = false
-})
+local lsp = require('lsp-zero')
+
+lsp.preset("recommended")
 
 lsp.ensure_installed({
     'tsserver',
     'rust_analyzer',
-    'csharp_ls',
-    'eslint'
+    -- 'csharp_ls',
+    'eslint',
+    'lua_ls',
+    'cssls',
+    'gopls',
+    'pylsp',
+    'vscode-html-language-server',
+    'css-languageserver'
 })
 
 local cmp = require('cmp')
