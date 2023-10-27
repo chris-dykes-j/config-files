@@ -111,13 +111,26 @@ require('lazy').setup({
     },
   },
 
+  --Colour Schemes
+  --[[
   {
-    -- Theme inspired by Atom
     'shaunsingh/nord.nvim',
     as = 'nord',
     priority = 1000,
     config = function()
       vim.cmd.colorscheme 'nord'
+      vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
+      vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
+    end,
+  },
+  ]]
+  {
+    "folke/tokyonight.nvim",
+    lazy = false,
+    priority = 1000,
+    opts = {},
+    config = function ()
+      vim.cmd.colorscheme('tokyonight')
       vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
       vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
     end,
@@ -221,7 +234,6 @@ vim.opt.shiftwidth = 4
 vim.opt.expandtab = true
 
 vim.opt.smartindent = true
-
 
 -- [[ Basic Keymaps ]]
 
@@ -446,6 +458,15 @@ local luasnip = require 'luasnip'
 require('luasnip.loaders.from_vscode').lazy_load()
 luasnip.config.setup {}
 
+-- For tab and enter complete
+local function custom_confirm_key_behavior(fallback)
+    if cmp.visible() then
+        cmp.confirm({ select = true })
+    else
+        fallback()
+    end
+end
+
 cmp.setup {
   snippet = {
     expand = function(args)
@@ -453,33 +474,11 @@ cmp.setup {
     end,
   },
   mapping = cmp.mapping.preset.insert {
-    ['<C-n>'] = cmp.mapping.select_next_item(),
-    ['<C-p>'] = cmp.mapping.select_prev_item(),
-    ['<C-d>'] = cmp.mapping.scroll_docs(-4),
-    ['<C-f>'] = cmp.mapping.scroll_docs(4),
-    ['<C-Space>'] = cmp.mapping.complete {},
-    ['<CR>'] = cmp.mapping.confirm {
-      behavior = cmp.ConfirmBehavior.Replace,
-      select = true,
-    },
-    ['<Tab>'] = cmp.mapping(function(fallback)
-      if cmp.visible() then
-        cmp.select_next_item()
-      elseif luasnip.expand_or_locally_jumpable() then
-        luasnip.expand_or_jump()
-      else
-        fallback()
-      end
-    end, { 'i', 's' }),
-    ['<S-Tab>'] = cmp.mapping(function(fallback)
-      if cmp.visible() then
-        cmp.select_prev_item()
-      elseif luasnip.locally_jumpable(-1) then
-        luasnip.jump(-1)
-      else
-        fallback()
-      end
-    end, { 'i', 's' }),
+    ['<CR>'] = cmp.mapping(custom_confirm_key_behavior, { 'i', 's' }),
+    ['<Tab>'] = cmp.mapping(custom_confirm_key_behavior, { 'i', 's' }),
+    ['<C-k>'] = cmp.mapping.select_prev_item(),
+    ['<C-j>'] = cmp.mapping.select_next_item(),
+    ['<C-Space>'] = cmp.mapping.complete(),
   },
   sources = {
     { name = 'nvim_lsp' },
