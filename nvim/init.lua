@@ -114,25 +114,12 @@ require('lazy').setup({
   },
 
   --Colour Schemes
-  --[[
   {
-    'shaunsingh/nord.nvim',
-    as = 'nord',
+    'embark-theme/vim',
+    as = 'embark',
     priority = 1000,
     config = function()
-      vim.cmd.colorscheme 'nord'
-      vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
-      vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
-    end,
-  },
-  ]]
-  {
-    "folke/tokyonight.nvim",
-    lazy = false,
-    priority = 1000,
-    opts = {},
-    config = function ()
-      vim.cmd.colorscheme('tokyonight')
+      vim.cmd.colorscheme 'embark'
       vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
       vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
     end,
@@ -237,6 +224,8 @@ vim.opt.expandtab = true
 
 vim.opt.smartindent = true
 
+-- Turn off comment on next line
+vim.cmd([[autocmd FileType * set formatoptions-=ro]])
 -- [[ Basic Keymaps ]]
 
 -- Keymaps for better default experience
@@ -490,3 +479,4 @@ cmp.setup {
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
+
