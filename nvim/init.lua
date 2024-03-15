@@ -37,6 +37,7 @@ require('lazy').setup({
 
   -- Document Writing, goyo.vim
   'junegunn/goyo.vim',
+  'junegunn/limelight.vim',
 
   -- NOTE: This is where your plugins related to LSP can be installed.
   --  The configuration is done below. Search for lspconfig to find it below.
@@ -481,4 +482,34 @@ cmp.setup {
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
 
--- spellcheck
+-- Goyo config
+local function goyo_enter()
+  vim.opt.linebreak = true
+  vim.cmd('set spell spelllang=en_gb')
+end
+
+local function goyo_leave()
+  vim.opt.linebreak = false
+  vim.cmd('set nospell')
+  vim.cmd.colorscheme 'embark'
+  vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
+  vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
+end
+
+vim.api.nvim_create_autocmd("User", {
+  pattern = "GoyoEnter",
+  nested = true,
+  callback = goyo_enter,
+})
+
+vim.api.nvim_create_autocmd("User", {
+  pattern = "GoyoLeave",
+  nested = true,
+  callback = goyo_leave,
+})
+
+vim.g.goyo_width = '100'
+vim.g.goyo_height = '100'
+
+-- Limelight config
+vim.g.limelight_conceal_ctermfg = 'gray'
