@@ -35,7 +35,8 @@ require('lazy').setup({
   -- Harpoon baby
   'theprimeagen/harpoon',
 
-  'rktjmp/lush.nvim',
+  -- Document Writing, goyo.vim
+  'junegunn/goyo.vim',
 
   -- NOTE: This is where your plugins related to LSP can be installed.
   --  The configuration is done below. Search for lspconfig to find it below.
@@ -480,3 +481,4 @@ cmp.setup {
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
 
+-- spellcheck
