@@ -508,8 +508,8 @@ vim.api.nvim_create_autocmd("User", {
   callback = goyo_leave,
 })
 
-vim.g.goyo_width = '100'
-vim.g.goyo_height = '100'
+--vim.g.goyo_width = '100'
+--vim.g.goyo_height = '100'
 
 -- Limelight config
 vim.g.limelight_conceal_ctermfg = 'gray'
